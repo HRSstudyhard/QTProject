@@ -62,9 +62,22 @@ QString MainWindow::calculation(bool *ok)
             result = operand1 + operand2;
         }else if(op == "-"){
             result = operand1 - operand2;
-        }else if(op == "*"||"×"){
+        }else if(op == "×"||op == "*"){
+            //原来的写法是 op == "*"||"×"，"×"是非空字符串常量，恒为真，
+            //导致后面的除法分支永远进不去，8÷2 会被算成 8×2
             result = operand1 * operand2;
-        }else if(op == "/"||"÷"){
+        }else if(op == "÷"||op == "/"){
+            //除数为 0 时直接给出提示，避免出现 inf / nan
+            if(operand2 == 0.0){
+                if(ok){
+                    *ok = false;
+                }
+                operands.clear();
+                opcodes.clear();
+                operand.clear();
+                ui->statusBar->showMessage(QString("除数不能为0"));
+                return QString("除数不能为0");
+            }
             result = operand1 / operand2;
         }
 
@@ -152,9 +165,17 @@ void MainWindow::btnBinaryOperatorClicked()
         operand = "";
         opcodes.push_back(opcode);
 
-        QString result = calculation();
-        ui->display->setText(result);
-
+        //只有凑够两个操作数时才真正计算：否则 calculation() 会走到 else 分支
+        //返回默认的 0，显示框就被清零了（例如输入 2 后按 + 会显示 0）
+        if(operands.size() >= 2 && opcodes.size() > 0)
+        {
+            QString result = calculation();
+            ui->display->setText(result);
+        }
+        else
+        {
+            ui->display->setText(operands.back());
+        }
     }
 }
 
