@@ -169,7 +169,8 @@ QString MainWindow::calculation(bool *ok)
             return ui->display->text();
         }
 
-        // 用 'g' 格式只保留有效数字，避免 0.1+0.2 显示成 0.30000000000000004
+        // 用 'g' 格式保留 12 位有效数字：既能去掉 0.1+0.2 这类浮点尾数，
+        // 也不会像默认的 6 位那样把 1234568 显示成 1.23457e+06
         operands.push_back(QString::number(result, 'g', 12));
         ui->statusBar->showMessage(QString("计算结果：%1").arg(QString::number(result, 'g', 12)));
     }
@@ -396,7 +397,8 @@ void MainWindow::inputBinaryOperator(const QString &op)
     }
 
     // 正常输入完一个操作数后按运算符
-    operands.push_back(operand);
+    // （刚清空就按运算符时 operand 为空，这里按 0 处理，避免把空串压进栈）
+    operands.push_back(operand.isEmpty() ? QString("0") : operand);
     operand.clear();
     opcodes.push_back(op);
     opcode = op;
