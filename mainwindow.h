@@ -38,6 +38,8 @@ private slots:
 
     void on_btnEqual_clicked();
 
+    void on_btnZF_clicked();
+
     void btnBinaryOperatorClicked();
     void btnUnaryOperaterClicked();
 

@@ -29,11 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->btnSquare,SIGNAL(clicked()),this,SLOT(btnUnaryOperaterClicked()));
     connect(ui->btnSqrt,SIGNAL(clicked()),this,SLOT(btnUnaryOperaterClicked()));
 
-    connect(ui->btnClearAll,SIGNAL(clicked()),this,SLOT(on_btnClearAll_clicked()));
-    connect(ui->btnClear,SIGNAL(clicked()),this,SLOT(on_btnClear_clicked()));
-    connect(ui->btnDel,SIGNAL(clicked()),this,SLOT(on_btnDel_clicked()));
-
-    connect(ui->btnZF,SIGNAL(clicked()),this,SLOT(on_btnZF_clicked()));
+    //注意：on_btnClearAll_clicked()、on_btnClear_clicked()、on_btnDel_clicked()、
+    //on_btnPeriod_clicked()、on_btnEqual_clicked()、on_btnZF_clicked() 的命名符合
+    //on_<对象名>_<信号名> 规则，ui->setupUi() 内部的 QMetaObject::connectSlotsByName()
+    //已经自动完成连接，这里不能再手动 connect()，
+    //否则一次点击会进入槽函数两次（原来退格键按一次删两位就是这个原因）。
 
 }
 
@@ -203,3 +203,19 @@ void MainWindow::btnUnaryOperaterClicked()
     }
 }
 
+
+void MainWindow::on_btnZF_clicked()
+{
+    //正负号：直接改变当前操作数的符号
+    if(operand.isEmpty()){
+        return;
+    }
+
+    if(operand.startsWith("-")){
+        operand.remove(0, 1);
+    }else{
+        operand.prepend("-");
+    }
+
+    ui->display->setText(operand.isEmpty() ? QString("0") : operand);
+}
