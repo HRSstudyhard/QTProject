@@ -1,0 +1,106 @@
+/* ============================================================
+ * 计算器界面样式表（Qt Style Sheet）
+ * 在 MainWindow::loadStyleSheet() 中通过 :/style.qss 加载
+ * ============================================================ */
+
+/* 窗口背景 */
+QMainWindow {
+    background-color: #f2f3f5;
+}
+
+/* 表达式提示：显示“左操作数 + 当前运算符” */
+QLabel#lblExpression {
+    color: #8a8f99;
+    font-family: "Microsoft YaHei";
+    font-size: 15px;
+    padding-right: 10px;
+}
+
+/* 显示框：大号数字、右对齐、白底圆角 */
+QLineEdit#display {
+    background-color: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    padding: 4px 12px;
+    color: #1f2329;
+    font-family: "Microsoft YaHei";
+    font-size: 30px;
+}
+
+/* 所有按键的公共外观 */
+QPushButton {
+    background-color: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    min-height: 44px;
+    color: #1f2329;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+}
+
+QPushButton:hover {
+    background-color: #eef5ff;
+    border-color: #8fb8ea;
+}
+
+QPushButton:pressed {
+    background-color: #d8e8fb;
+}
+
+/* 数字键：加粗，视觉上更突出 */
+QPushButton#btnNum0, QPushButton#btnNum1, QPushButton#btnNum2,
+QPushButton#btnNum3, QPushButton#btnNum4, QPushButton#btnNum5,
+QPushButton#btnNum6, QPushButton#btnNum7, QPushButton#btnNum8,
+QPushButton#btnNum9, QPushButton#btnPeriod, QPushButton#btnZF {
+    background-color: #fbfbfc;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 二元运算符：蓝色字体、浅蓝底色，与数字键区分 */
+QPushButton#btnPlus, QPushButton#btnMinus,
+QPushButton#btnMultiple, QPushButton#btnDivide {
+    background-color: #eaf2fd;
+    color: #0b62c4;
+    font-size: 22px;
+}
+
+/* 等号：实心蓝底白字，突出最主要的功能 */
+QPushButton#btnEqual {
+    background-color: #0b62c4;
+    border-color: #0b62c4;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+QPushButton#btnEqual:hover {
+    background-color: #1a76dd;
+}
+
+QPushButton#btnEqual:pressed {
+    background-color: #0952a5;
+}
+
+/* 清除、退格：红色系，提示这是“破坏性”操作 */
+QPushButton#btnClear, QPushButton#btnClearAll, QPushButton#btnDel {
+    background-color: #fdf1ef;
+    border-color: #f2d3cd;
+    color: #c0392b;
+    font-size: 17px;
+}
+
+/* 一元运算符（%、1/x、x^2、√）与 ± 用灰色，弱化显示 */
+QPushButton#btnPercentage, QPushButton#btnInverse,
+QPushButton#btnSquare, QPushButton#btnSqrt {
+    background-color: #f5f6f8;
+    color: #4a4f57;
+    font-size: 16px;
+}
+
+/* 状态栏 */
+QStatusBar {
+    background-color: #f2f3f5;
+    color: #6b7280;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+}

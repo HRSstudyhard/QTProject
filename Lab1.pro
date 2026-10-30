@@ -32,3 +32,10 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+        style.qrc
+
+# 源码与界面文件中含有中文，MSVC 需要显式指定以 UTF-8 编译，否则中文会乱码
+msvc: QMAKE_CXXFLAGS += /utf-8
+
