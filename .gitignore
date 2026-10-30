@@ -1,0 +1,24 @@
+# Qt 编译产生的中间文件与可执行文件
+build-*/
+debug/
+release/
+*.o
+*.obj
+*.exe
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+*.user
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+
+# Word 打开文档时产生的临时锁文件
+~$*
+
+# 本地临时目录（原文件备份、界面截图、文档解包）
+_backup_original/
+_final_snapshot/
+_shots/
+_docx_extract/
